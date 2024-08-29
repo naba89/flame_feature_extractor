@@ -6,6 +6,8 @@ Most of the code is taken from the original library and modified to suit my need
 ## Installation
 
 ```bash
+git clone https://github.com/naba89/flame_feature_extractor.git
+cd flame_feature_extractor
 pip install -r requirements_pre.txt
 pip install -r requirements_post.txt
 bash build_resources.sh
