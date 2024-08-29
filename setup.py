@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(
     name="flame_feature_extractor",
@@ -6,5 +6,12 @@ setup(
     description="Flame Feature Extraction",
     author="Nabarun Goswami",
     author_email="nabarungoswami@mi.t.u-tokyo.ac.jp",
-    packages=["flame_feature_extractor"],
+    packages=find_packages(),
+    package_dir={"": "."},
+    install_requires=[
+        "mediapipe",
+        "scikit-image",
+        "onnx",
+        "onnxruntime",
+    ],
 )
