@@ -146,7 +146,7 @@ class PreProcessMediaPipeDense:
             emoca_images.append(emoca_image)
             lmks_denses.append(lmks_dense)
 
-        if emoca_images and len(emoca_images) != b:
+        if not emoca_images or len(emoca_images) != b:
             return None
         emoca_images = torch.stack(emoca_images)
         lmks_denses = torch.stack(lmks_denses)
