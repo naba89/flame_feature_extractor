@@ -169,4 +169,5 @@ cython_debug/
 *.png
 *.jpg
 *.jpeg
+*.ckpt
 resources/
