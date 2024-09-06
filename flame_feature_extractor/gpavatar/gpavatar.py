@@ -50,7 +50,7 @@ class gpavatar_r2g(torch.nn.Module):
             batch_size, v, 3, -1, tex_tplanes.shape[-2], tex_tplanes.shape[-1]
         )
         self.texture_planes = self.attn_module(
-            self.query_style_tplane.expand(batch_size, -1, -1, -1, -1),
+            self.query_style_tplane.expand(batch_size, -1, -1, -1, -1, -1),
             tex_tplanes
         )
         self.inp_shape, self.inp_trans = inp_shape, inp_trans
@@ -64,15 +64,16 @@ class gpavatar_r2g(torch.nn.Module):
             shape_params=self.inp_shape.expand(bs, -1).to(expression.device),
             eye_pose_params=None
         )
+        print(points.shape, self.inp_trans.shape, self.inp_shape.shape, self.texture_planes.shape)
         # set camera
         if transform_matrix is None:
-            transform_matrix = self.inp_trans.to(expression.device)
+            transform_matrix = self.inp_trans.expand(bs, -1).to(expression.device)
         self.nerf_camera.set_position(transform_matrix=transform_matrix)
         # render results
         _, gen_fine, params_dict = self.nerf_camera.render(
             nerf_query_fn=self.nerf_mlp, noise=False, background=0.0, 
             # nerf_fn params
-            points_position=points, tex_tplanes=self.texture_planes.expand(bs, -1, -1, -1, -1, -1),
+            points_position=points, tex_tplanes=self.texture_planes,
         )
         gen_sr = self.up_renderer(gen_fine)
         return gen_sr
