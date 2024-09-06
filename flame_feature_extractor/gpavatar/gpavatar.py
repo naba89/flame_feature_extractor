@@ -8,6 +8,7 @@ import torchvision
 
 from .libs import flame_lite, CubicNeRFCamera
 from .modules import StyleUNet, MTAttention, PointsDecoder
+from ...renderer.flame import Flame
 
 class gpavatar_r2g(torch.nn.Module):
     def __init__(self, ):
@@ -22,7 +23,8 @@ class gpavatar_r2g(torch.nn.Module):
         self.query_style_tplane = torch.nn.Parameter(torch.randn(1, 1, 3, 32, 256, 256), requires_grad=True)
         self.attn_module = MTAttention(dim=32, qkv_bias=True)
         # models
-        self.flame = flame_lite(n_shape=100, n_exp=50, scale=5.0)
+        # self.flame = flame_lite(n_shape=100, n_exp=50, scale=5.0)
+        self.flame = Flame(n_shape=100, n_exp=50, scale=5.0)
         self.nerf_camera = CubicNeRFCamera(12.0, [128, 128], 32)
         # load ckpt
         self._abs_script_path = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
