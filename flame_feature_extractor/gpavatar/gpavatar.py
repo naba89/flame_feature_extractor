@@ -8,7 +8,7 @@ import torchvision
 
 from .libs import flame_lite, CubicNeRFCamera
 from .modules import StyleUNet, MTAttention, PointsDecoder
-from ...renderer.flame import Flame
+from flame_feature_extractor.renderer.flame import Flame
 
 class gpavatar_r2g(torch.nn.Module):
     def __init__(self, ):
