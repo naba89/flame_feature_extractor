@@ -50,7 +50,7 @@ class gpavatar_r2g(torch.nn.Module):
             batch_size, v, 3, -1, tex_tplanes.shape[-2], tex_tplanes.shape[-1]
         )
         self.texture_planes = self.attn_module(
-            self.query_style_tplane.expand(batch_size, -1, -1, -1, -1, -1),
+            self.query_style_tplane.expand(batch_size, -1, -1, -1, -1),
             tex_tplanes
         )
         self.inp_shape, self.inp_trans = inp_shape, inp_trans
