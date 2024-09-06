@@ -60,7 +60,8 @@ class gpavatar_r2g(torch.nn.Module):
         # get flame points
         points = self.flame(
             expression_params=expression, pose_params=pose,
-            shape_params=self.inp_shape[None].to(expression.device), 
+            shape_params=self.inp_shape[None].to(expression.device),
+            eye_pose_params=None
         )
         # set camera
         if transform_matrix is None:
