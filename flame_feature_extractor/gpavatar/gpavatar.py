@@ -64,10 +64,10 @@ class gpavatar_r2g(torch.nn.Module):
             shape_params=self.inp_shape.expand(bs, -1).to(expression.device),
             eye_pose_params=None
         )
-        print(points.shape, self.inp_trans.shape, self.inp_shape.shape, self.texture_planes.shape)
+        # print(points.shape, self.inp_trans.shape, self.inp_shape.shape, self.texture_planes.shape)
         # set camera
         if transform_matrix is None:
-            transform_matrix = self.inp_trans.expand(bs, -1).to(expression.device)
+            transform_matrix = self.inp_trans.expand(bs, -1, -1).to(expression.device)
         self.nerf_camera.set_position(transform_matrix=transform_matrix)
         # render results
         _, gen_fine, params_dict = self.nerf_camera.render(
