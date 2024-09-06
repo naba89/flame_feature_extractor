@@ -73,7 +73,7 @@ class gpavatar_r2g(torch.nn.Module):
         _, gen_fine, params_dict = self.nerf_camera.render(
             nerf_query_fn=self.nerf_mlp, noise=False, background=0.0, 
             # nerf_fn params
-            points_position=points, tex_tplanes=self.texture_planes,
+            points_position=points, tex_tplanes=self.texture_planes.expand(bs, -1, -1, -1, -1, -1)
         )
         gen_sr = self.up_renderer(gen_fine)
         return gen_sr
