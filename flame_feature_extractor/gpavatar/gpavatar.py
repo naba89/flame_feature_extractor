@@ -64,7 +64,7 @@ class gpavatar_r2g(torch.nn.Module):
             shape_params=self.inp_shape.expand(bs, -1).to(expression.device),
             eye_pose_params=None
         )
-        # print(points.shape, self.inp_trans.shape, self.inp_shape.shape, self.texture_planes.shape)
+        print(points.shape, self.inp_trans.shape, self.inp_shape.shape, self.texture_planes.shape)
         # set camera
         if transform_matrix is None:
             transform_matrix = self.inp_trans.expand(bs, -1, -1).to(expression.device)
