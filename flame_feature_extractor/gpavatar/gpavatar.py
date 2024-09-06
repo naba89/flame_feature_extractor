@@ -9,8 +9,9 @@ import torchvision
 from .libs import flame_lite, CubicNeRFCamera
 from .modules import StyleUNet, MTAttention, PointsDecoder
 from flame_feature_extractor.renderer.flame import FLAME
+from transformers.modeling_utils import ModuleUtilsMixin
 
-class gpavatar_r2g(torch.nn.Module):
+class gpavatar_r2g(torch.nn.Module, ModuleUtilsMixin):
     def __init__(self, ):
         super().__init__()
         # model config
@@ -38,7 +39,7 @@ class gpavatar_r2g(torch.nn.Module):
     def build_avatar(self, inp_track=None):
         if inp_track is None:
             inp_track = torch.load(os.path.join(self._abs_script_path, 'checkpoints', 'elon_musk.pth'), map_location='cpu')
-        inp_image = inp_track['feature_image'][None].cuda()
+        inp_image = inp_track['feature_image'][None].to(self.device)
         inp_shape, inp_trans = inp_track['feature_shape'], inp_track['frame_trans']
         # merge multiple input images
         batch_size, v, c, h, w = inp_image.shape
