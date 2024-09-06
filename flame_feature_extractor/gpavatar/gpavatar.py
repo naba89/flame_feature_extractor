@@ -57,10 +57,11 @@ class gpavatar_r2g(torch.nn.Module):
         print('Avatar built.')
 
     def forward(self, expression, pose, transform_matrix=None):
+        bs = expression.size(0)
         # get flame points
         points = self.flame(
             expression_params=expression, pose_params=pose,
-            shape_params=self.inp_shape[None].to(expression.device),
+            shape_params=self.inp_shape.expand(bs, -1).to(expression.device),
             eye_pose_params=None
         )
         # set camera
