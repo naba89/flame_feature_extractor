@@ -10,3 +10,4 @@ onnxruntime
 scikit-image
 mediapipe
 git+https://github.com/elliottzheng/batch-face.git@master
+git+https://github.com/nerfstudio-project/nerfacc.git
